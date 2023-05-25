@@ -1,9 +1,9 @@
 import json
 
 
-def open_operations():
+def open_operations(file_json):
     """Достает список операций из .json"""
-    with open("operations.json", "r", encoding="utf-8") as file:
+    with open(file_json, "r", encoding="utf-8") as file:
         data = json.load(file)
     return data
 
@@ -52,6 +52,8 @@ def transaction(operation):
     """Выводит откуда и куда совершена транзакция"""
     key_card = 'from'
     key_card_pecipient = 'to'
+
+    # Откуда совершена транзакция
     if key_card in operation:
         stage_1 = operation[key_card].split(' ')
         number_sender = stage_1[-1]
@@ -66,6 +68,7 @@ def transaction(operation):
     else:
         sender_check = 'Bank'
 
+    # Куда совершена транзакция
     stage_2 = operation[key_card_pecipient].split(' ')
     number_pecipient = stage_2[-1]
     if len(number_pecipient) > 16:
